@@ -4,9 +4,8 @@
 
 #include "../include/config.h"
 #include "../include/encrypt.h"
-#include "../include/decrypt.h"
 
-// TODO: arena allocator, implement full enigma, remove decrypt func
+// TODO: arena allocator
 
 int main(int argc, char* argv[]) {
     Config cfg;
@@ -15,8 +14,7 @@ int main(int argc, char* argv[]) {
     if (r == -2) return 0;  // help
     if (r != 0) return r;
 
-    if (do_encrypt) encrypt(&cfg);
-    else decrypt(&cfg);
+    encrypt(&cfg);
 
     if (!cfg.out_buffer) {
         fprintf(stderr, "No output produced\n");

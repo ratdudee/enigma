@@ -15,7 +15,7 @@ int load_config_from_args(int argc, char* argv[], Config* cfg, int* do_encrypt) 
     const char* outfile = NULL;
     const char* keyfile = NULL;
     const char* reflector = NULL;
-    const char* wheels = NULL;
+    const char* rotors = NULL;
     const char* rings = NULL;
     const char* plugboard = NULL;
 
@@ -30,8 +30,8 @@ int load_config_from_args(int argc, char* argv[], Config* cfg, int* do_encrypt) 
             keyfile = argv[++i];
         } else if (strcmp(argv[i], "--reflector") == 0 && i + 1 < argc) {
             reflector = argv[++i];
-        } else if (strcmp(argv[i], "--wheels") == 0 && i + 1 < argc) {
-            wheels = argv[++i];
+        } else if (strcmp(argv[i], "--rotors") == 0 && i + 1 < argc) {
+            rotors = argv[++i];
         } else if (strcmp(argv[i], "--rings") == 0 && i + 1 < argc) {
             rings = argv[++i];
         } else if (strcmp(argv[i], "--plugboard") == 0 && i + 1 < argc) {
@@ -39,7 +39,7 @@ int load_config_from_args(int argc, char* argv[], Config* cfg, int* do_encrypt) 
         } else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "--decrypt") == 0) {
             mode_encrypt = 0;
         } else if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "--help") == 0) {
-            fprintf(stdout, "Usage: %s -i input.txt (-o output.txt) (-k keyfile | --reflector R --wheels W --rings R) [-d]\n", argv[0]);
+            fprintf(stdout, "Usage: %s -i input.txt (-o output.txt) (-k keyfile | --reflector R --rotors W --rings R) [-d]\n", argv[0]);
             return -2;
         } else {
             fprintf(stderr, "Unknown argument: %s\n", argv[i]);
@@ -72,8 +72,8 @@ int load_config_from_args(int argc, char* argv[], Config* cfg, int* do_encrypt) 
         cfg->key = parse_key_file(keyfile);
         if (!cfg->key) { free_config(cfg); return 8; }
     } else {
-        // must at least provide wheels/rings/reflector via args
-        cfg->key = parse_key_components(reflector, wheels, rings, plugboard);
+        // must at least provide rotors/rings/reflector via args
+        cfg->key = parse_key_components(reflector, rotors, rings, plugboard);
         if (!cfg->key) { free_config(cfg); return 9; }
     }
 

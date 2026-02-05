@@ -4,7 +4,6 @@ ENIGMA_DIR := enigma
 
 .PHONY: enigma clean
 
-
 all: $(BIN_DIR) enigma
 	cp $(ENIGMA_DIR)/build/enigma $<
 
@@ -15,7 +14,6 @@ enigma:
 
 $(BIN_DIR):
 	mkdir $@
-
 
 clean:
 	make -C $(ENIGMA_DIR) clean
